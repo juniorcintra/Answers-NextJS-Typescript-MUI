@@ -9,7 +9,7 @@ export const books = [
         idBook: 1,
         title: "Equação de Primeiro Grau",
         description: "Resolva a equação: 3x + 5 = 20.",
-        answer: "",
+        answer: "asdfasdf",
         duration: 0,
       },
       {
@@ -17,7 +17,7 @@ export const books = [
         idBook: 1,
         title: "Cálculo de Área",
         description: "Calcule a área de um triângulo de base 10 e altura 5.",
-        answer: "",
+        answer: "asdfasd",
         duration: 0,
       },
     ],

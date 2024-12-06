@@ -1,13 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Tab, Tabs } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Tab,
+  Tabs,
+} from "@mui/material";
 import MainTopBar from "./components/mainTopBar";
 import BasicCard from "./components/cardQuestions";
 import { useGlobalStore } from "./store/slices";
 
 export default function Home() {
   const [value, setValue] = useState(0);
+  const [checked, setChecked] = useState(false);
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -32,16 +40,46 @@ export default function Home() {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: "column",
             alignItems: "flex-start",
             justifyContent: "flex-start",
-            gap: "33px",
-            flexWrap: "wrap",
+            gap: "21px",
           }}
         >
-          {books.map((book) => {
-            return <BasicCard key={book.id} book={book} />;
-          })}
+          <FormGroup>
+            <FormControlLabel
+              control={<Checkbox />}
+              label="Mostrar apenas questões não respondidas"
+              onChange={() => setChecked(!checked)}
+              checked={checked}
+            />
+          </FormGroup>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "flex-start",
+              justifyContent: "flex-start",
+              gap: "33px",
+              flexWrap: "wrap",
+            }}
+          >
+            {books
+              .filter((book) => {
+                if (checked) {
+                  if (
+                    book.questions.find((question) => question.answer === "")
+                  ) {
+                    return true;
+                  }
+                  return false;
+                }
+                return true;
+              })
+              .map((book) => {
+                return <BasicCard key={book.id} book={book} />;
+              })}
+          </Box>
         </Box>
       </Box>
     </Box>

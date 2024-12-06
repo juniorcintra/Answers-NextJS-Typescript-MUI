@@ -1,10 +1,8 @@
 "use client";
 
-import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
-import InsertCommentIcon from "@mui/icons-material/InsertCommentOutlined";
-import SearchIcon from "@mui/icons-material/SearchOutlined";
 import { useState } from "react";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs } from "@mui/material";
+import MainTopBar from "./components/mainTopBar";
 
 export default function Home() {
   const [value, setValue] = useState(0);
@@ -14,19 +12,10 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col h-screen ">
-      <div className=" py-7 px-16 flex flex-row items-center justify-end gap-9 shadow-custom-inset">
-        <NotificationsIcon sx={{ color: "rgba(165, 180, 203, 1)" }} />
-        <InsertCommentIcon sx={{ color: "rgba(165, 180, 203, 1)" }} />
-        <div className="flex flex-row items-center cursor-pointer">
-          <SearchIcon sx={{ color: "rgba(165, 180, 203, 1)" }} />
-          <Typography sx={{ color: "rgba(165, 180, 203, 1)" }}>
-            Procurar
-          </Typography>
-        </div>
-      </div>
+    <main className="flex h-screen flex-col">
+      <MainTopBar />
 
-      <div className="flex flex-col items-start justify-start mt-11 w-11/12 max-w-5xl mx-auto gap-11">
+      <div className="mx-auto mt-11 flex w-11/12 max-w-5xl flex-col items-start justify-start gap-11">
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
             value={value}

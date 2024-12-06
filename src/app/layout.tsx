@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={chivo.className + " light"}>
+      <body className={chivo.className}>
         <GlobalCssPriority>
           <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
         </GlobalCssPriority>

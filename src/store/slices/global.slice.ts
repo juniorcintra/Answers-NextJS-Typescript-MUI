@@ -1,17 +1,18 @@
 // stores/globalStore.ts
-import { Book, Question } from "@/app/types";
-import { books } from "@/app/utils/constants";
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+
+import { Book, Question } from '@/types'
+import { books } from '@/utils/constants'
+import { create } from 'zustand'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 export type GlobalState = {
-  books: Book[];
-  book?: Book;
-  question?: Question;
-  setBook: (data: Book) => void;
-  setBooks: (data: Book[]) => void;
-  setQuestion: (data: Question) => void;
-};
+  books: Book[]
+  book?: Book
+  question?: Question
+  setBook: (data: Book) => void
+  setBooks: (data: Book[]) => void
+  setQuestion: (data: Question) => void
+}
 
 export const useGlobalStore = create<GlobalState>()(
   persist(
@@ -33,10 +34,10 @@ export const useGlobalStore = create<GlobalState>()(
         }),
     }),
     {
-      name: "answers",
+      name: 'answers',
       storage: createJSONStorage(() => sessionStorage),
     },
   ),
-);
+)
 
-export default useGlobalStore;
+export default useGlobalStore

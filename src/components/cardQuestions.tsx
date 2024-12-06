@@ -22,10 +22,11 @@ export default function BasicCard({ book }: BasicCardProps) {
     return false
   }
 
-  const { setBook } = useGlobalStore()
+  const { setBook, setQuestion } = useGlobalStore()
 
   const handleNavigate = () => {
     setBook(book)
+    setQuestion(book.questions[0])
     router.push('/book')
   }
 

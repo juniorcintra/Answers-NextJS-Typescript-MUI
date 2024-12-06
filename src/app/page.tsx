@@ -17,7 +17,7 @@ export default function Home() {
   const { books } = useGlobalStore()
 
   return (
-    <Box className="flex h-screen flex-col">
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <MainTopBar />
 
       <Box

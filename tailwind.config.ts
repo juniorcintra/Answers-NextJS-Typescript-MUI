@@ -6,15 +6,18 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  important: "#root",
   theme: {
     extend: {
       fontFamily: {
         sans: ["var(--font-chivo-sans)"],
       },
+      important: "#__next",
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+      },
+      boxShadow: {
+        "custom-inset": "0px -1px 0px 0px rgba(223, 229, 241, 1) inset",
       },
     },
   },

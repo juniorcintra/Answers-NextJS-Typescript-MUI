@@ -3,6 +3,7 @@ import { Chivo } from "next/font/google";
 import "./globals.css";
 
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import GlobalCssPriority from "./components/globalCssPriority";
 
 const chivo = Chivo({
   variable: "--font-chivo-sans",
@@ -20,9 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={chivo.className}>
-        <AppRouterCacheProvider>{children}+ </AppRouterCacheProvider>
+    <html lang="pt-BR">
+      <body className={chivo.className + " light"}>
+        <GlobalCssPriority>
+          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+        </GlobalCssPriority>
       </body>
     </html>
   );

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
 import MainTopBar from "./components/mainTopBar";
 import BasicCard from "./components/cardQuestions";
+import { useGlobalStore } from "./store/slices";
 
 export default function Home() {
   const [value, setValue] = useState(0);
@@ -11,6 +12,8 @@ export default function Home() {
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const { books } = useGlobalStore();
 
   return (
     <Box className="flex h-screen flex-col">
@@ -36,9 +39,9 @@ export default function Home() {
             flexWrap: "wrap",
           }}
         >
-          <BasicCard />
-          <BasicCard />
-          <BasicCard />
+          {books.map((book) => {
+            return <BasicCard key={book.id} book={book} />;
+          })}
         </Box>
       </Box>
     </Box>

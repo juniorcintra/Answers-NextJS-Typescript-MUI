@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import GlobalCssPriority from "./components/globalCssPriority";
+import { GlobalStoreProvider } from "./store";
 
 const chivo = Chivo({
   variable: "--font-chivo-sans",
@@ -23,9 +24,11 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={chivo.className}>
-        <GlobalCssPriority>
-          <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
-        </GlobalCssPriority>
+        <GlobalStoreProvider>
+          <GlobalCssPriority>
+            <AppRouterCacheProvider>{children}</AppRouterCacheProvider>
+          </GlobalCssPriority>
+        </GlobalStoreProvider>
       </body>
     </html>
   );

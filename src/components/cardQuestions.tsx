@@ -16,7 +16,7 @@ export default function BasicCard({ book }: BasicCardProps) {
   const router = useRouter()
 
   const handleGetStatus = () => {
-    if (book.questions.find((question) => question.answer === '')) {
+    if (book?.questions?.find((question) => question.answer === '')) {
       return true
     }
     return false
@@ -25,9 +25,11 @@ export default function BasicCard({ book }: BasicCardProps) {
   const { setBook, setQuestion } = useGlobalStore()
 
   const handleNavigate = () => {
-    setBook(book)
-    setQuestion(book.questions[0])
-    router.push('/book')
+    if (book?.questions) {
+      setBook(book)
+      setQuestion(book?.questions[0])
+      router.push('/book')
+    }
   }
 
   return (
@@ -55,7 +57,7 @@ export default function BasicCard({ book }: BasicCardProps) {
           }}
         />
       </Box>
-      <Typography variant="body2">{book.questions.length} questões</Typography>
+      <Typography variant="body2">{book?.questions?.length} questões</Typography>
       <Button
         sx={{ width: '100%', borderRadius: '36px' }}
         variant="contained"

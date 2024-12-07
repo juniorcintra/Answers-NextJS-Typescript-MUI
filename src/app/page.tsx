@@ -68,7 +68,7 @@ export default function Home() {
             {books
               .filter((book) => {
                 if (checked) {
-                  if (book.questions.find((question) => question.answer === '')) {
+                  if (book?.questions?.find((question) => question.answer === '')) {
                     return true
                   }
                   return false

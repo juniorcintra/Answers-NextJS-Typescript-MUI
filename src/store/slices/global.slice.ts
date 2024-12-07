@@ -7,7 +7,7 @@ import { createJSONStorage, persist } from 'zustand/middleware'
 
 export type GlobalState = {
   books: Book[]
-  book?: Book
+  book: Book | null
   question?: Question
   setBook: (data: Book) => void
   setBooks: (data: Book[]) => void
@@ -18,7 +18,7 @@ export const useGlobalStore = create<GlobalState>()(
   persist(
     (set) => ({
       books: books,
-      book: undefined,
+      book: null,
       question: undefined,
       setBook: (data) =>
         set({

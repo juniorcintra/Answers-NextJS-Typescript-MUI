@@ -19,3 +19,13 @@ npm run dev
 # or
 yarn dev
 ```
+
+## Rodando os testes
+
+Para testar, rode o comando:
+
+```bash
+npm run test
+# or
+yarn test
+```

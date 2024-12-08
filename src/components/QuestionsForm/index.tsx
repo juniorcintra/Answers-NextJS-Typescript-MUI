@@ -92,6 +92,7 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
           alignItems: 'center',
           fontWeight: 'bold',
         }}
+        data-testid="question-title"
       >
         {question?.title} {currentIndex + 1}/{book?.questions?.length}
       </Typography>

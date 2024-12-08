@@ -3,7 +3,7 @@ import React from 'react'
 import NotificationsIcon from '@mui/icons-material/NotificationsOutlined'
 import InsertCommentIcon from '@mui/icons-material/InsertCommentOutlined'
 import SearchIcon from '@mui/icons-material/SearchOutlined'
-import { Box, Typography } from '@mui/material'
+import { Badge, Box, Typography } from '@mui/material'
 
 export default function MainTopBar() {
   return (
@@ -19,7 +19,10 @@ export default function MainTopBar() {
         py: '28px',
       }}
     >
-      <NotificationsIcon sx={{ color: 'rgba(165, 180, 203, 1)', cursor: 'pointer' }} />
+      <Badge color="secondary" variant="dot">
+        <NotificationsIcon sx={{ color: 'rgba(165, 180, 203, 1)', cursor: 'pointer' }} />
+      </Badge>
+
       <InsertCommentIcon sx={{ color: 'rgba(165, 180, 203, 1)', cursor: 'pointer' }} />
       <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', cursor: 'pointer' }}>
         <SearchIcon sx={{ color: 'rgba(165, 180, 203, 1)' }} />

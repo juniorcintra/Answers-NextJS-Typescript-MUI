@@ -4,15 +4,15 @@ import Typography from '@mui/material/Typography'
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
 import { Box, Chip } from '@mui/material'
-import { Book } from '../types'
-import { useGlobalStore } from '../store/slices'
+import { Book } from '../../types'
+import { useGlobalStore } from '../../store/slices'
 import { useRouter } from 'next/navigation'
 
-interface BasicCardProps {
+interface CardBookProps {
   book: Book
 }
 
-export default function BasicCard({ book }: BasicCardProps) {
+export default function CardBook({ book }: CardBookProps) {
   const router = useRouter()
 
   const handleGetStatus = () => {

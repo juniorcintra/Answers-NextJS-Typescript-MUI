@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { Box, Checkbox, FormControlLabel, FormGroup, Tab, Tabs } from '@mui/material'
-import MainTopBar from '../components/mainTopBar'
-import BasicCard from '../components/cardQuestions'
+import MainTopBar from '../components/MainTopBar'
+import CardBook from '../components/CardBook'
 import { useGlobalStore } from '../store/slices'
 
 export default function Home() {
@@ -76,7 +76,7 @@ export default function Home() {
                 return true
               })
               .map((book) => {
-                return <BasicCard key={book.id} book={book} />
+                return <CardBook key={book.id} book={book} />
               })}
           </Box>
         </Box>

@@ -1,5 +1,5 @@
 import { useGlobalStore } from '@/store/slices'
-import { Box, Button, Divider, TextField, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Divider, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
@@ -16,6 +16,8 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answer, setAnswer] = useState(question?.answer ?? '')
+  const [success, setSuccess] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const isFirstQuestion = currentIndex === 0
 
@@ -44,6 +46,7 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
   }
 
   const updateCurrentQuestion = () => {
+    setLoading(true)
     const updatedQuestion = {
       ...question!,
       duration: seconds,
@@ -65,6 +68,11 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
 
     setBook(updatedBook)
     setBooks(updatedBooks)
+
+    setTimeout(() => {
+      setLoading(false)
+      setSuccess(true)
+    }, 1000)
 
     if (book?.questions && currentIndex === book?.questions?.length - 1) {
       setOpen(true)
@@ -121,10 +129,11 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
         sx={{ borderRadius: '36px' }}
         variant="contained"
         size="large"
+        color={success ? 'success' : 'primary'}
         disabled={answer === ''}
         onClick={updateCurrentQuestion}
       >
-        Enviar Resposta
+        {loading ? <CircularProgress color="inherit" size={26} /> : success ? 'Editar Resposta' : 'Enviar Resposta'}
       </Button>
 
       <Divider sx={{ backgroundColor: 'rgba(243, 243, 243, 1)', height: '1px', width: '100%' }} aria-hidden="true" />

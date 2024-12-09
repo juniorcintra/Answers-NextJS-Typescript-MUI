@@ -25,6 +25,7 @@ export default function QuestionsList() {
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         gap: '21px',
+        width: '100%',
       }}
     >
       <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
@@ -48,18 +49,42 @@ export default function QuestionsList() {
           display: 'flex',
           flexDirection: 'column',
           gap: '18px',
+          width: '100%',
         }}
       >
         {book?.questions?.map((question, index) => {
           return (
-            <Box key={question.id} sx={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <Typography sx={{ color: '#000', fontWeight: 'bold', fontSize: '16px', lineHeight: '19px' }}>
+            <Box
+              key={question.id}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '20px',
+                width: '100%',
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <Typography
+                sx={{ color: '#000', fontWeight: 'bold', fontSize: '16px', lineHeight: '19px', width: '100%' }}
+              >
                 {question.description} - 0{index + 1}
               </Typography>
-              <Typography sx={{ color: '#7D8DA6', fontWeight: '400', fontSize: '13px', lineHeight: '15px' }}>
+              <Typography
+                sx={{ color: '#7D8DA6', fontWeight: '400', fontSize: '13px', lineHeight: '15px', width: '100%' }}
+              >
                 Resposta:{' '}
               </Typography>
-              <Typography sx={{ color: '#7D8DA6', fontWeight: '400', fontSize: '13px', lineHeight: '15px' }}>
+              <Typography
+                sx={{
+                  color: '#7D8DA6',
+                  fontWeight: '400',
+                  fontSize: '13px',
+                  lineHeight: '15px',
+                  width: '100%',
+                  textOverflow: 'ellipsis',
+                }}
+              >
                 {question.answer !== '' ? question.answer : 'Não respondida'}
               </Typography>
               {book?.questions && index !== book?.questions?.length - 1 && (

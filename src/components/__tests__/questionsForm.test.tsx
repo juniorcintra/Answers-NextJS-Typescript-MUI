@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import QuestionsForm from '../QuestionsForm'
 import { useGlobalStore } from '@/store/slices'
 
@@ -14,10 +14,12 @@ const mockSetBooks = jest.fn()
 
 describe('QuestionsForm', () => {
   const book = {
+    id: 1,
     questions: [
-      { id: 1, title: 'Question 1', description: 'This is question 1', answer: '' },
-      { id: 2, title: 'Question 2', description: 'This is question 2', answer: '' },
+      { id: 1, title: 'Question 1', description: 'This is question 1', answer: '', duration: 0 },
+      { id: 2, title: 'Question 2', description: 'This is question 2', answer: '', duration: 0 },
     ],
+    duration: 0,
   }
 
   const question = book.questions[0]
@@ -42,7 +44,7 @@ describe('QuestionsForm', () => {
   test('deve renderizar a primeira questão corretamente', () => {
     render(<QuestionsForm seconds={0} setSeconds={mockSetSeconds} setOpen={mockSetOpen} />)
 
-    expect(screen.getByText((content) => content.startsWith('Question 1'))).toBeInTheDocument()
+    expect(screen.getByTestId('question-title')).toHaveTextContent('Question 1 1/2')
   })
 
   test('deve navegar para a próxima questão ao clicar em "Próxima"', () => {
@@ -78,14 +80,20 @@ describe('QuestionsForm', () => {
     expect(submitButton).not.toBeDisabled()
   })
 
-  test('deve chamar updateCurrentQuestion quando a resposta for enviada', () => {
+  test('deve exibir o estado de carregamento ao enviar a resposta', async () => {
     render(<QuestionsForm seconds={10} setSeconds={mockSetSeconds} setOpen={mockSetOpen} />)
 
     const input = screen.getByPlaceholderText('Escreva sua resposta aqui') as HTMLInputElement
     fireEvent.change(input, { target: { value: 'Nova resposta' } })
 
-    const submitButton = screen.getByText('Enviar Resposta') as HTMLButtonElement
+    const submitButton = screen.getByRole('button', { name: /enviar resposta/i })
     fireEvent.click(submitButton)
+
+    expect(screen.getByRole('progressbar')).toBeInTheDocument()
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /editar resposta/i })).toBeInTheDocument()
+    })
 
     expect(mockSetBook).toHaveBeenCalled()
     expect(mockSetBooks).toHaveBeenCalled()

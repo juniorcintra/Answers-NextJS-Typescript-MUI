@@ -20,6 +20,7 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
   const [loading, setLoading] = useState(false)
 
   const isFirstQuestion = currentIndex === 0
+  const isLastQuestion = book?.questions && currentIndex === book?.questions?.length - 1
 
   const nextQuestion = () => {
     if (book?.questions && currentIndex < book?.questions.length - 1) {
@@ -27,6 +28,7 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
       setQuestion(book?.questions[currentIndex + 1])
       setSeconds(0)
       setAnswer('')
+      setSuccess(false)
     }
   }
 
@@ -36,6 +38,7 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
       setQuestion(book?.questions[currentIndex - 1])
       setSeconds(0)
       setAnswer('')
+      setSuccess(false)
     }
   }
 
@@ -74,8 +77,12 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
       setSuccess(true)
     }, 1000)
 
-    if (book?.questions && currentIndex === book?.questions?.length - 1) {
-      setOpen(true)
+    if (isLastQuestion) {
+      setTimeout(() => {
+        setLoading(false)
+        setSuccess(true)
+        setOpen(true)
+      }, 1000)
     }
   }
 
@@ -126,14 +133,21 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
       </Box>
 
       <Button
-        sx={{ borderRadius: '36px' }}
+        sx={{ borderRadius: '36px', backgroundColor: success ? '#219653' : '#542DC0', textTransform: 'initial' }}
         variant="contained"
         size="large"
-        color={success ? 'success' : 'primary'}
         disabled={answer === ''}
         onClick={updateCurrentQuestion}
       >
-        {loading ? <CircularProgress color="inherit" size={26} /> : success ? 'Editar Resposta' : 'Enviar Resposta'}
+        {loading ? (
+          <CircularProgress color="inherit" size={26} />
+        ) : success ? (
+          'Editar resposta'
+        ) : isLastQuestion ? (
+          'Enviar resposta e finalizar'
+        ) : (
+          'Enviar resposta'
+        )}
       </Button>
 
       <Divider sx={{ backgroundColor: 'rgba(243, 243, 243, 1)', height: '1px', width: '100%' }} aria-hidden="true" />
@@ -147,16 +161,11 @@ export default function QuestionsForm({ seconds, setSeconds, setOpen }: Question
           width: '100%',
         }}
       >
-        <Button variant="text" onClick={prevQuestion} disabled={isFirstQuestion}>
+        <Button variant="text" onClick={prevQuestion} disabled={isFirstQuestion} sx={{ textTransform: 'initial' }}>
           <ArrowBackIcon />
           Anterior
         </Button>
-        <Button
-          variant="text"
-          onClick={nextQuestion}
-          disabled={book?.questions && currentIndex === book?.questions?.length - 1}
-          style={{ marginLeft: '10px' }}
-        >
+        <Button variant="text" onClick={nextQuestion} disabled={isLastQuestion} sx={{ textTransform: 'initial' }}>
           Próxima
           <ArrowForwardIcon />
         </Button>

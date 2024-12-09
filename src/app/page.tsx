@@ -30,9 +30,17 @@ export default function Home() {
           maxWidth: '1200px',
         }}
       >
-        <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Questões" />
-          <Tab label="Respostas" />
+        <Tabs
+          value={tab}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          sx={{
+            '& .Mui-selected': { color: '#542DC0 !important' },
+            '& .MuiTabs-indicator': { backgroundColor: '#542DC0' },
+          }}
+        >
+          <Tab label="Questões" sx={{ fontWeight: 'bold' }} />
+          <Tab label="Respostas" sx={{ fontWeight: 'bold' }} />
         </Tabs>
 
         {tab === 0 ? <BooksList /> : <QuestionsList />}

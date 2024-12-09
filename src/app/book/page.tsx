@@ -89,7 +89,7 @@ export default function BookPage() {
         }}
       >
         <Image src={iconPNG} alt="icon" />
-        <Typography sx={{ color: 'rgba(17, 11, 62, 1)' }}>Estudologia</Typography>
+        <Typography sx={{ color: 'rgba(17, 11, 62, 1)', fontWeight: 'bold' }}>Estudologia</Typography>
       </Box>
 
       <Box
@@ -113,12 +113,18 @@ export default function BookPage() {
             width: '100%',
           }}
         >
-          <Button variant="text" onClick={() => router.back()}>
+          <Button variant="text" onClick={() => router.back()} sx={{ textTransform: 'initial' }}>
             <ArrowBackIcon />
             Home
           </Button>
           <Typography
-            sx={{ color: 'rgba(17, 11, 62, 1)', display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+            sx={{
+              color: 'rgba(17, 11, 62, 1)',
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              fontWeight: 'bold',
+            }}
           >
             <EditOutlinedIcon />
             {book?.title}
@@ -184,7 +190,14 @@ export default function BookPage() {
             {renderTime()}
           </Typography>
           <Button
-            sx={{ borderRadius: '36px', width: '216px', color: '#442B8C', borderColor: '#442B8C' }}
+            sx={{
+              borderRadius: '36px',
+              width: '216px',
+              color: '#442B8C',
+              borderColor: '#442B8C',
+              fontWeight: 'bold',
+              textTransform: 'capitalize',
+            }}
             variant="outlined"
             size="large"
             onClick={() => router.back()}

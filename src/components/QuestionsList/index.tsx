@@ -28,12 +28,21 @@ export default function QuestionsList() {
         width: '100%',
       }}
     >
-      <Tabs value={tab} onChange={handleChange} aria-label="basic tabs example">
+      <Tabs
+        value={tab}
+        onChange={handleChange}
+        aria-label="basic tabs example"
+        sx={{
+          '& .Mui-selected': { color: '#542DC0 !important' },
+          '& .MuiTabs-indicator': { backgroundColor: '#542DC0' },
+        }}
+      >
         {books.map((book) => {
           return (
             <Tab
               key={book.id}
               value={book.id}
+              sx={{ fontWeight: 'bold' }}
               label={
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '12px' }}>
                   <EditOutlinedIcon />

@@ -24,6 +24,7 @@ export default function BooksList() {
           label="Mostrar apenas questões não respondidas"
           onChange={() => setChecked(!checked)}
           checked={checked}
+          sx={{ color: '#141736' }}
         />
       </FormGroup>
       <Box

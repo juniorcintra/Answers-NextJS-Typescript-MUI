@@ -76,7 +76,7 @@ describe('QuestionsForm', () => {
     const input = screen.getByPlaceholderText('Escreva sua resposta aqui') as HTMLInputElement
     fireEvent.change(input, { target: { value: 'Nova resposta' } })
 
-    const submitButton = screen.getByText('Enviar Resposta') as HTMLButtonElement
+    const submitButton = screen.getByRole('button', { name: /enviar resposta/i }) as HTMLButtonElement
     expect(submitButton).not.toBeDisabled()
   })
 
